@@ -1,0 +1,16 @@
+{
+    "name": "abbert/datagrid-bundle",
+    "description": "Symfony bundle",
+    "authors": [
+        {
+            "name": "Albert Bakker",
+            "email": "albert@skrepr.com"
+        }
+    ],
+    "require": {
+        "abbert/datagrid": "^1.0.0"
+    },
+    "autoload": {
+        "psr-4": { "Abbert\\DatagridBundle\\": "" }
+    }
+}

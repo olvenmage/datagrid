@@ -1,0 +1,49 @@
+<style>
+    .dataTables_filter input {
+        width: 260px !important;
+    }
+</style>
+
+<script>
+    var DataTables = (DataTables === undefined) ? {} : DataTables;
+
+    DataTables['<?=$this->getId()?>'] = $('#<?=$this->getId()?>').DataTable({
+        stateSave: true,
+        columns: [
+            <?php foreach ($this->getColumns() as $key => $column): ?>
+                <?=$key != 0 ? ',' : ''?>{data: "<?=$column->getName()?>", orderable: <?=$column->getOption('orderable') === true ? 'true' : 'false'?>}
+            <?php endforeach ?>
+        ],
+        ajax: {
+            url: "<?=$this->getRequest()->getRequestUri()?>",
+            data: function (d) {
+                d.datagrid = '<?=$this->getId()?>'
+            }
+        },
+        processing: true,
+        serverSide: true,
+        responsive: true,
+        <?php if ($this->getOption('order')): ?>
+        order: [<?php foreach ((array) $this->getOption('order') as $dir): ?>[<?=$dir[0]?>, '<?=$dir[1]?>']<?php endforeach ?>],
+        <?php endif ?>
+        language: {
+            "sProcessing": "Bezig...",
+            "sLengthMenu": "_MENU_ resultaten weergeven",
+            "sZeroRecords": "Geen data om weer te geven",
+            "sInfo": "Resulaten _START_ tot _END_ van _TOTAL_ weergegeven",
+            "sInfoEmpty": "Geen data om weer te geven",
+            "sInfoFiltered": " (gefilterd uit _MAX_ regels)",
+            "sInfoPostFix": "",
+            "sSearch": "Zoeken:",
+            "sEmptyTable": "Geen gegevens aanwezig in de tabel",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+            "oPaginate": {
+                "sFirst": "Eerste pagina",
+                "sLast": "Laatste pagina",
+                "sNext": "Volgende pagina",
+                "sPrevious": "Vorige pagina"
+            }
+        }
+    });
+</script>

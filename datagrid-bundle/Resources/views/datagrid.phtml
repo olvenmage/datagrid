@@ -1,0 +1,26 @@
+<table id="<?=$this->getId()?>" class="table table-striped" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <?php foreach ($this->getColumns() as $column): ?>
+            <th <?php foreach ($column->getAttributes() as $attribute => $value): ?><?=$attribute?>="<?=$value?>"<?php endforeach ?>>
+            <?php if (!$column->getOption('hideName')): ?>
+                <?=$column->getName()?>
+            <?php endif ?>
+            </th>
+        <?php endforeach ?>
+    </tr>
+    </thead>
+
+    <tfoot>
+    <tr>
+        <?php foreach ($this->getColumns() as $column): ?>
+            <th>
+                <?php if (!$column->getOption('hideName')): ?>
+                    <?=$column->getName()?>
+                <?php endif ?>
+            </th>
+        <?php endforeach ?>
+    </tr>
+    </tfoot>
+</table>
+
