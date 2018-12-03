@@ -6,8 +6,9 @@
 
 <script>
     var DataTables = (DataTables === undefined) ? {} : DataTables;
+    var table;
 
-    DataTables['<?=$this->getId()?>'] = $('#<?=$this->getId()?>').DataTable({
+    var options = {
         stateSave: true,
         columns: [
             <?php foreach ($this->getColumns() as $key => $column): ?>
@@ -45,5 +46,13 @@
                 "sPrevious": "Vorige pagina"
             }
         }
-    });
+    };
+
+    if (window.Resources.createDataTables) {
+        table = window.Resources.createDataTables('#<?=$this->getId()?>', options);
+    } else {
+        table = $('#<?=$this->getId()?>').DataTable(options);
+    }
+
+    DataTables['<?=$this->getId()?>'] = table;
 </script>
